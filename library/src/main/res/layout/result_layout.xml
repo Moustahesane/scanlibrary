@@ -28,7 +28,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_enhamce_image"
             android:singleLine="true"
-            android:text="Magic"
+            android:text="Magique"
             android:textColor="@android:color/white" />
 
         <Button
