@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">ScanLibrary</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Bonjour !</string>
     <string name="action_settings">Settings</string>
     <string name="scanning">Scan en cours</string>
     <string name="done">Enregistrer</string>
@@ -11,6 +11,6 @@
     <string name="loading">Chargement</string>
     <string name="applying_filter">Filtrage</string>
     <string name="low_memory">Mémoire faible</string>
-    <string name="low_memory_message">Your phone is low on memory, you may feel some lags while editing images.</string>
+    <string name="low_memory_message">La mémoire de votre télephone est faible, Vous risquez de rencontrer un décalage lors de l\'édition des images.</string>
 
 </resources>
