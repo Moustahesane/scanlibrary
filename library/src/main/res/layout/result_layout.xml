@@ -72,7 +72,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_rotc"
             android:singleLine="true"
-            android:text="droit"
+            android:text="droite"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
