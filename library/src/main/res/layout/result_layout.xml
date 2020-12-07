@@ -1,14 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="#16638D"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical">
+        android:layout_gravity="center_vertical"
+        >
 
         <Button
             android:id="@+id/original"
@@ -85,7 +86,8 @@
         android:background="@color/bottom_background_color"
         android:orientation="horizontal"
         android:padding="@dimen/bottom_bar_padding"
-        android:text="@string/done" />
+        android:text="@string/done"
+        android:textColor="@android:color/white"/>
 
 
     <FrameLayout
@@ -103,6 +105,15 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/scanPadding" />
     </FrameLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/topBar"
+        android:backgroundTint="@color/bottom_button_color"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/listDivider" />
 
 
 </RelativeLayout>
