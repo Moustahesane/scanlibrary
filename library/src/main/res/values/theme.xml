@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="myTheme">
-        <item name="android:background">@color/blue</item>
+
+    <style name="mytheme">
+
+        <item name="android:background">@color/bottom_background_color</item>
         <item name="android:textColor">#fff</item>
+
+
     </style>
+
+
 </resources>
