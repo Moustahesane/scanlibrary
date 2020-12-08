@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue">#ff59a9ff</color>
+    <color name="bottom_background_color">#007bff</color>
+    <color name="bottom_button_color">#fff</color>
+    <color name="orange">#ffff900d</color>
+    <color name="polygonViewCircleBackground">#90e5f8ff</color>
+    <color name="polygonViewCircleStrokeColor">#ff59a9ff</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="bottom_bar_padding">15dp</dimen>
+    <dimen name="polygonViewCircleWidth">32dp</dimen>
+    <dimen name="polygonViewStrokeWidth">2dp</dimen>
+    <dimen name="scanPadding">16dp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">ScanLibrary</string>
+    <string name="applying_filter">Filtrage</string>
+    <string name="cantCrop">Dimensions incorrectes de l\'image, changer les points</string>
+    <string name="done">Enregistrer</string>
+    <string name="hello_world">Bonjour !</string>
+    <string name="loading">Chargement</string>
+    <string name="low_memory">Mémoire faible</string>
+    <string name="low_memory_message">La mémoire de votre télephone est faible, Vous risquez de rencontrer un décalage lors de l\'édition des images.</string>
+    <string name="ok">Ok</string>
+    <string name="scan">Suivant</string>
+    <string name="scanning">Scan en cours</string>
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">#00FF00</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="myTheme">
+        <item name="android:background">@color/blue</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+</resources>

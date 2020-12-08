@@ -29,7 +29,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_enhamce_image"
             android:singleLine="true"
-            android:text="magie"
+            android:text="Magie"
             android:textColor="@android:color/white" />
 
         <Button
@@ -40,7 +40,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_gray"
             android:singleLine="true"
-            android:text="gris"
+            android:text="Gris"
             android:textColor="@android:color/white" />
 
         <Button
@@ -62,7 +62,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_rotac"
             android:singleLine="true"
-            android:text="gauche"
+            android:text="Gauche"
             android:textColor="@android:color/white" />
 
         <Button
@@ -73,7 +73,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_rotc"
             android:singleLine="true"
-            android:text="droite"
+            android:text="Droite"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
