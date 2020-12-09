@@ -1,5 +1,6 @@
 package com.scanlibrary;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -211,9 +212,11 @@ public class ScanFragment extends Fragment {
             showProgressDialog(getString(R.string.scanning));
         }
 
+        //@SuppressLint("WrongThread")
         @Override
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap =  getScannedBitmap(original, points);
+            sourceImageView.setImageBitmap(bitmap);
             Uri uri = Utils.getUri(getActivity(), bitmap);
             scanner.onScanFinish(uri);
             return bitmap;
