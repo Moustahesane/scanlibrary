@@ -15,8 +15,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toolbar;
 
-import java.io.IOException;
-
 /**
  * Created by jhansi on 28/03/15.
  */
@@ -43,6 +41,8 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         fragmentTransaction.add(R.id.content, fragment);
         fragmentTransaction.commit();
     }
+    private static ProgressDialogFragment progressDialogFragment;
+
 
     protected int getPreferenceContent() {
         return getIntent().getIntExtra(ScanConstants.OPEN_INTENT_PREFERENCE, 0);
@@ -62,7 +62,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
     }
     Uri myUri;
     @Override
-    public void onScanFinish(Uri uri) throws IOException {
+    public void onScanFinish(final Uri uri) {
         /*ResultFragment fragment = new ResultFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ScanConstants.SCANNED_RESULT, uri);
@@ -71,35 +71,19 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content, fragment);
         fragmentTransaction.addToBackStack(ResultFragment.class.toString());
-        fragmentTransaction.commit();
-        /////////////////////////////////////////////
+        fragmentTransaction.commit();*/
         myUri = uri;
-        Bitmap bitmap = Utils.getBitmap(this, uri);
-        Bitmap processedImg = getMagicColorBitmap(bitmap);
-
-        Intent data = new Intent();
-        Uri uriFin = Utils.getUri(this, processedImg);
-        data.putExtra(ScanConstants.SCANNED_RESULT, uriFin);
-        this.setResult(Activity.RESULT_OK, data);
-        System.gc();
-        this.finish();
-*/
         showProgressDialog(getResources().getString(R.string.loading));
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    /*Intent data = new Intent();
-                    Bitmap bitmap = transformed;
-                    if (bitmap == null) {
-                        bitmap = original;
-                    }*/
-                    Bitmap bitmap = Utils.getBitmap(ScanActivity.this, myUri);
-                    Bitmap processedImg = getMagicColorBitmap(bitmap);
-
                     Intent data = new Intent();
+                    Bitmap bitmap = Utils.getBitmap(ScanActivity.this,myUri);
 
-                    Uri uriFin = Utils.getUri(ScanActivity.this, processedImg);
+                    Bitmap magicImg = getMagicColorBitmap(bitmap);
+
+                    Uri uriFin = Utils.getUri(ScanActivity.this, magicImg);
 
 
                     data.putExtra(ScanConstants.SCANNED_RESULT, uriFin);
@@ -119,8 +103,8 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
             }
         });
 
+
     }
-    private static ProgressDialogFragment progressDialogFragment;
 
     protected synchronized void showProgressDialog(String message) {
         if (progressDialogFragment != null && progressDialogFragment.isVisible()) {
