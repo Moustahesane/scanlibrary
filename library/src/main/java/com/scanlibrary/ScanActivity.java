@@ -4,13 +4,18 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentCallbacks2;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toolbar;
+
+import java.io.IOException;
 
 /**
  * Created by jhansi on 28/03/15.
@@ -55,10 +60,10 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         fragmentTransaction.addToBackStack(ScanFragment.class.toString());
         fragmentTransaction.commit();
     }
-
+    Uri myUri;
     @Override
-    public void onScanFinish(Uri uri) {
-        ResultFragment fragment = new ResultFragment();
+    public void onScanFinish(Uri uri) throws IOException {
+        /*ResultFragment fragment = new ResultFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ScanConstants.SCANNED_RESULT, uri);
         fragment.setArguments(bundle);
@@ -67,6 +72,69 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         fragmentTransaction.add(R.id.content, fragment);
         fragmentTransaction.addToBackStack(ResultFragment.class.toString());
         fragmentTransaction.commit();
+        /////////////////////////////////////////////
+        myUri = uri;
+        Bitmap bitmap = Utils.getBitmap(this, uri);
+        Bitmap processedImg = getMagicColorBitmap(bitmap);
+
+        Intent data = new Intent();
+        Uri uriFin = Utils.getUri(this, processedImg);
+        data.putExtra(ScanConstants.SCANNED_RESULT, uriFin);
+        this.setResult(Activity.RESULT_OK, data);
+        System.gc();
+        this.finish();
+*/
+        showProgressDialog(getResources().getString(R.string.loading));
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    /*Intent data = new Intent();
+                    Bitmap bitmap = transformed;
+                    if (bitmap == null) {
+                        bitmap = original;
+                    }*/
+                    Bitmap bitmap = Utils.getBitmap(ScanActivity.this, myUri);
+                    Bitmap processedImg = getMagicColorBitmap(bitmap);
+
+                    Intent data = new Intent();
+
+                    Uri uriFin = Utils.getUri(ScanActivity.this, processedImg);
+
+
+                    data.putExtra(ScanConstants.SCANNED_RESULT, uriFin);
+                    ScanActivity.this.setResult(Activity.RESULT_OK, data);
+
+                    System.gc();
+                    ScanActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismissDialog();
+                            ScanActivity.this.finish();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+    private static ProgressDialogFragment progressDialogFragment;
+
+    protected synchronized void showProgressDialog(String message) {
+        if (progressDialogFragment != null && progressDialogFragment.isVisible()) {
+            // Before creating another loading dialog, close all opened loading dialogs (if any)
+            progressDialogFragment.dismissAllowingStateLoss();
+        }
+        progressDialogFragment = null;
+        progressDialogFragment = new ProgressDialogFragment(message);
+        FragmentManager fm = getFragmentManager();
+        progressDialogFragment.show(fm, ProgressDialogFragment.class.toString());
+    }
+
+    protected synchronized void dismissDialog() {
+        progressDialogFragment.dismissAllowingStateLoss();
     }
 
     @Override
