@@ -7,7 +7,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnKeyListener;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.Window;
 
 @SuppressLint("ValidFragment")
 public class ProgressDialogFragment extends DialogFragment {
@@ -21,6 +23,8 @@ public class ProgressDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final ProgressDialog dialog = new ProgressDialog(getActivity(), R.style.mytheme);
+        Window win = dialog.getWindow();
+        win.setGravity(Gravity.CENTER);
         dialog.setIndeterminate(true);
         dialog.setMessage(message);
         dialog.setCancelable(false);
