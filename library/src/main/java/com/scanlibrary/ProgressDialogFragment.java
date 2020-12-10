@@ -27,6 +27,7 @@ public class ProgressDialogFragment extends DialogFragment {
 
         Window win = dialog.getWindow();
         win.setGravity(Gravity.CENTER);
+
         dialog.setIndeterminate(true);
         dialog.setMessage(message);
         dialog.setCancelable(false);
