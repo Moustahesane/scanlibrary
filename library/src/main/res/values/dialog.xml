@@ -3,7 +3,7 @@
     <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
         <!--@android:style/Theme.Dialog-->
         <item name="android:textColor">#fff</item>
-        <item name="android:windowBackground">#26508e</item>
+        <item name="android:background">#26508e</item>
         <item name="android:typeface">monospace</item>
         <item name="android:textSize">11sp</item>
     </style>

@@ -251,6 +251,7 @@ public class ScanFragment extends Fragment {
     protected void dismissDialog() {
         progressDialogFragment.dismissAllowingStateLoss();
         scanButton.setVisibility(View.INVISIBLE);
+        polygonView.setVisibility(View.INVISIBLE);
     }
 
 }
