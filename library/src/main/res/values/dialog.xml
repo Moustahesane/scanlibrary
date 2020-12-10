@@ -5,7 +5,7 @@
 
         <item name="android:textColor">#fff</item>
         <item name="android:windowBackground">@color/bottom_background_color</item>
-        <item name="android:background">#26508e</item>
+        <item name="android:background">@color/bottom_background_color</item>
         <item name="android:typeface">monospace</item>
         <item name="android:textSize">11sp</item>
     </style>
