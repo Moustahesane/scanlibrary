@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AlertDialogCustom" parent="@android:style/Theme.Holo.Light.Dialog.Alert">
+    <style name="AlertDialogCustom" parent="android:Theme.Holo.Light.Dialog.Alert">
         <!--@android:style/Theme.Dialog-->
         <item name="android:textColor">#fff</item>
         <item name="android:windowBackground">#26508e</item>
