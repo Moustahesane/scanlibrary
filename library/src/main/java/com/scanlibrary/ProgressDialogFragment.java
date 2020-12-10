@@ -27,7 +27,7 @@ public class ProgressDialogFragment extends DialogFragment {
 
         Window win = dialog.getWindow();
         win.setGravity(Gravity.CENTER);
-
+        win.setBackgroundDrawableResource(R.drawable.ic_launcher);
         dialog.setIndeterminate(true);
         dialog.setMessage(message);
         dialog.setCancelable(false);
