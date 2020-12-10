@@ -73,7 +73,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         fragmentTransaction.addToBackStack(ResultFragment.class.toString());
         fragmentTransaction.commit();*/
         myUri = uri;
-        showProgressDialog(getResources().getString(R.string.loading));
+        //showProgressDialog(getResources().getString(R.string.loading));
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -93,7 +93,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
                     ScanActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            dismissDialog();
+                            //dismissDialog();
                             ScanActivity.this.finish();
                         }
                     });
