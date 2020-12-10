@@ -201,6 +201,7 @@ public class ScanFragment extends Fragment {
     private class ScanAsyncTask extends AsyncTask<Void, Void, Bitmap> {
 
         private Map<Integer, PointF> points;
+        private Bitmap btm;
 
         public ScanAsyncTask(Map<Integer, PointF> points) {
             this.points = points;
@@ -216,6 +217,7 @@ public class ScanFragment extends Fragment {
         @Override
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap =  getScannedBitmap(original, points);
+            btm = bitmap;
             Uri uri = Utils.getUri(getActivity(), bitmap);
             scanner.onScanFinish(uri);
             return bitmap;
@@ -224,7 +226,14 @@ public class ScanFragment extends Fragment {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-            sourceImageView.setImageBitmap(bitmap);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    sourceImageView.setImageBitmap(btm);
+                }
+            });
+
             bitmap.recycle();
             dismissDialog();
         }
