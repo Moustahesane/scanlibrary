@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Created by jhansi on 29/03/15.
  */
@@ -230,7 +231,7 @@ public class ScanFragment extends Fragment {
                 @Override
                 public void run() {
 
-                    sourceImageView.setImageBitmap(btm);
+                    setBitmap(btm);
                 }
             });
 
