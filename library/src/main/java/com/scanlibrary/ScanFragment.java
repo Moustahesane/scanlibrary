@@ -64,8 +64,9 @@ public class ScanFragment extends Fragment {
 
     private void init() {
         sourceImageView = (ImageView) view.findViewById(R.id.sourceImageView);
-        sourceImageView.setVisibility(View.VISIBLE);
+
         scanButton = (Button) view.findViewById(R.id.scanButton);
+        scanButton.setVisibility(View.VISIBLE);
         scanButton.setOnClickListener(new ScanButtonClickListener());
         sourceFrame = (FrameLayout) view.findViewById(R.id.sourceFrame);
         polygonView = (PolygonView) view.findViewById(R.id.polygonView);
@@ -249,7 +250,7 @@ public class ScanFragment extends Fragment {
 
     protected void dismissDialog() {
         progressDialogFragment.dismissAllowingStateLoss();
-        sourceImageView.setVisibility(View.INVISIBLE);
+        scanButton.setVisibility(View.INVISIBLE);
     }
 
 }

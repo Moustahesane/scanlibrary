@@ -23,7 +23,7 @@ public class ProgressDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final ProgressDialog dialog = new ProgressDialog(getActivity());
+        final ProgressDialog dialog = new ProgressDialog(new ContextThemeWrapper(getActivity(), R.style.AlertDialogCustom));
         Window win = dialog.getWindow();
         win.setGravity(Gravity.CENTER);
         dialog.setIndeterminate(true);
