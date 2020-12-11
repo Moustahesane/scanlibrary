@@ -230,7 +230,7 @@ public class ScanFragment extends Fragment {
             Uri uri; //= Utils.getUri(getActivity(), bitmap);
             //scanner.onScanFinish(uri);
             btm = ((ScanActivity)getActivity()).getMagicColorBitmap(bitmap);
-            uri = Utils.getUri(getActivity(), btm);
+            uri = Utils.getUri(((ScanActivity)getActivity()), btm);
 
             Intent data = new Intent();
 
@@ -243,7 +243,7 @@ public class ScanFragment extends Fragment {
                 @Override
                 public void run() {
                     dismissDialog();
-                    getActivity().finish();
+                    ((ScanActivity)getActivity()).finish();
 
                 }
             });
