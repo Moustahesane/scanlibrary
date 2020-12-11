@@ -63,6 +63,8 @@ public class ScanFragment extends Fragment {
 
     }
 
+
+
     private void init() {
         sourceImageView = (ImageView) view.findViewById(R.id.sourceImageView);
 
@@ -240,7 +242,7 @@ public class ScanFragment extends Fragment {
 
             bitmap.recycle();
             dismissDialog();
-            Toast.makeText(getActivity(), "Image Finalisée", Toast.LENGTH_SHORT).show();
+
         }
     }
 

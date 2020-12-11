@@ -184,9 +184,11 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
             // Open your camera here.
             if (isIntentPreferenceSet()) {
                 handleIntentPreference();
-            } else {
-                getActivity().finish();
+                return;
             }
+            //else {
+                getActivity().finish();
+            //}
         }
     }
 
@@ -270,7 +272,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
 
     public void openMediaContent() {
         camorgal = 1;
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
         startActivityForResult(intent, ScanConstants.PICKFILE_REQUEST_CODE);

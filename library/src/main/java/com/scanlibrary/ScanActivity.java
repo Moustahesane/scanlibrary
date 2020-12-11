@@ -122,6 +122,14 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
     }
 
     @Override
+    public void onBackPressed() {
+
+
+
+
+    }
+
+    @Override
     public void onTrimMemory(int level) {
         switch (level) {
             case ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN:
