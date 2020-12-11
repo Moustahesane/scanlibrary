@@ -224,13 +224,13 @@ public class ScanFragment extends Fragment {
         @Override
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap =  getScannedBitmap(original, points);
-            btm = bitmap;
+
 
             setBitmap(btm);
             Uri uri; //= Utils.getUri(getActivity(), bitmap);
             //scanner.onScanFinish(uri);
-            bitmap = getMagicColorBitmap(bitmap);
-            uri = Utils.getUri(getActivity(), bitmap);
+            btm = ((ScanActivity)getActivity()).getMagicColorBitmap(bitmap);
+            uri = Utils.getUri(getActivity(), btm);
 
             Intent data = new Intent();
 
@@ -244,10 +244,11 @@ public class ScanFragment extends Fragment {
                 public void run() {
                     dismissDialog();
                     getActivity().finish();
+
                 }
             });
 
-        return bitmap;
+        return btm;
         }
 
         @Override
