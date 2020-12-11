@@ -80,7 +80,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
     }
 
     private void init() {
-        cameraButton = (ImageButton) view.findViewById(R.id.cameraButton); 
+        cameraButton = (ImageButton) view.findViewById(R.id.cameraButton);
         cameraButton.setOnClickListener(new CameraButtonClickListener());
         galleryButton = (ImageButton) view.findViewById(R.id.selectButton);
         galleryButton.setOnClickListener(new GalleryClickListener());
@@ -185,10 +185,9 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
             if (isIntentPreferenceSet()) {
                 handleIntentPreference();
                 return;
-            }
-            //else {
+            } else {
                 getActivity().finish();
-            //}
+            }
         }
     }
 

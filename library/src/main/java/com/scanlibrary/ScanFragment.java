@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -224,9 +225,29 @@ public class ScanFragment extends Fragment {
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap =  getScannedBitmap(original, points);
             btm = bitmap;
-            Uri uri = Utils.getUri(getActivity(), bitmap);
-            scanner.onScanFinish(uri);
-            return bitmap;
+
+            setBitmap(btm);
+            Uri uri; //= Utils.getUri(getActivity(), bitmap);
+            //scanner.onScanFinish(uri);
+            bitmap = getMagicColorBitmap(bitmap);
+            uri = Utils.getUri(getActivity(), bitmap);
+
+            Intent data = new Intent();
+
+            data.putExtra(ScanConstants.SCANNED_RESULT, uri);
+
+            getActivity().setResult(Activity.RESULT_OK, data);
+
+            System.gc();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dismissDialog();
+                    getActivity().finish();
+                }
+            });
+
+        return bitmap;
         }
 
         @Override
@@ -257,5 +278,7 @@ public class ScanFragment extends Fragment {
         scanButton.setVisibility(View.INVISIBLE);
         polygonView.setVisibility(View.INVISIBLE);
     }
+
+    public native Bitmap getMagicColorBitmap(Bitmap bitmap);
 
 }
