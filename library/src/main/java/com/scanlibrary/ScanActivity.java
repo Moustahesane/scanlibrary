@@ -87,7 +87,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
 
 
                     data.putExtra(ScanConstants.SCANNED_RESULT, uriFin);
-                    ScanActivity.this.setResult(Activity.RESULT_OK, data); 
+                    ScanActivity.this.setResult(Activity.RESULT_OK, data);
 
                     System.gc();
                     ScanActivity.this.runOnUiThread(new Runnable() {
