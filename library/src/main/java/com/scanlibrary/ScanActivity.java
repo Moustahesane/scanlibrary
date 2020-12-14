@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentCallbacks2;
@@ -119,6 +120,18 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
             }
         });
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.content);
+        if (!(fragment instanceof IBackPress) || !((IBackPress) fragment).onBackPressed()) {
+            super.onBackPressed();
+        }
+
+        this.finish();
 
     }
 

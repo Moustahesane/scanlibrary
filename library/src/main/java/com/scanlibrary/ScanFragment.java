@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * Created by jhansi on 29/03/15.
  */
-public class ScanFragment extends Fragment {
+public class ScanFragment extends Fragment implements IBackPress {
 
     private Button scanButton;
     private ImageView sourceImageView;
@@ -63,6 +63,10 @@ public class ScanFragment extends Fragment {
 
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return true;
+    }
 
     private void init() {
         sourceImageView = (ImageView) view.findViewById(R.id.sourceImageView);
