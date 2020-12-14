@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -34,7 +35,7 @@ import java.util.Map;
  */
 public class ScanFragment extends Fragment implements IBackPress {
 
-    private Button scanButton;
+    private Button scanButton, editButton;
     private ImageView sourceImageView;
     private FrameLayout sourceFrame;
     private PolygonView polygonView;
@@ -72,8 +73,10 @@ public class ScanFragment extends Fragment implements IBackPress {
         sourceImageView = (ImageView) view.findViewById(R.id.sourceImageView);
 
         scanButton = (Button) view.findViewById(R.id.scanButton);
+        editButton  = (Button) view.findViewById(R.id.editButton);
         scanButton.setVisibility(View.VISIBLE);
         scanButton.setOnClickListener(new ScanButtonClickListener());
+        editButton.setOnClickListener(new EditButtonClickListener());
         sourceFrame = (FrameLayout) view.findViewById(R.id.sourceFrame);
         polygonView = (PolygonView) view.findViewById(R.id.polygonView);
         sourceFrame.post(new Runnable() {
@@ -172,6 +175,19 @@ public class ScanFragment extends Fragment implements IBackPress {
         }
     }
 
+    private class EditButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Map<Integer, PointF> points = polygonView.getPoints();
+            if (isScanPointsValid(points)) {
+                new EditAsyncTask(points).execute();
+            } else {
+                showErrorDialog();
+            }
+
+        }
+    }
+
     private void showErrorDialog() {
         SingleButtonDialogFragment fragment = new SingleButtonDialogFragment(R.string.ok, getString(R.string.cantCrop), "Error", true);
         FragmentManager fm = getActivity().getFragmentManager();
@@ -256,6 +272,51 @@ public class ScanFragment extends Fragment implements IBackPress {
                     setBitmap(btm);
                 }
             });
+
+            bitmap.recycle();
+            dismissDialog();
+        }
+    }
+
+    private class EditAsyncTask extends AsyncTask<Void, Void, Bitmap> {
+
+        private Map<Integer, PointF> points;
+
+
+        public EditAsyncTask(Map<Integer, PointF> points) {
+            this.points = points;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProgressDialog(getString(R.string.scanning));
+        }
+
+        //@SuppressLint("WrongThread")
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+            Bitmap bitmap =  getScannedBitmap(original, points);
+            Uri uri = Utils.getUri(getActivity(), bitmap);
+
+            ResultFragment fragment = new ResultFragment();
+            Bundle bundle = new Bundle();
+
+            bundle.putParcelable(ScanConstants.SCANNED_RESULT, uri);
+            fragment.setArguments(bundle);
+            android.app.FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.content, fragment);
+            fragmentTransaction.addToBackStack(ResultFragment.class.toString());
+            fragmentTransaction.commit();
+
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+
 
             bitmap.recycle();
             dismissDialog();

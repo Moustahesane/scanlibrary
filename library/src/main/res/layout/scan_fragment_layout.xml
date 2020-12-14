@@ -6,6 +6,17 @@
     android:layout_gravity="center">
 
     <Button
+        android:id="@+id/editButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/scanButton"
+        android:background="@color/greenish"
+        android:orientation="horizontal"
+        android:padding="@dimen/bottom_bar_padding"
+        android:textColor="@android:color/white"
+        android:text="Éditer"></Button>
+
+    <Button
         android:id="@+id/scanButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
