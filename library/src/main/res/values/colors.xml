@@ -2,6 +2,7 @@
 <resources>
 
     <color name="blue">#ff59a9ff</color>
+    <color name="white">#fff</color>
     <color name="greenish">#3CAEA3</color>
     <color name="progColor">#073b4c</color>
     <color name="orange">#ffff900d</color>

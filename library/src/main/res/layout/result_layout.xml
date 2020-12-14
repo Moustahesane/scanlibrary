@@ -19,7 +19,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_image"
             android:text="Org"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/magicColor"
@@ -30,7 +30,7 @@
             android:drawableTop="@drawable/ic_enhamce_image"
             android:singleLine="true"
             android:text="Magie"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/grayMode"
@@ -41,7 +41,7 @@
             android:drawableTop="@drawable/ic_gray"
             android:singleLine="true"
             android:text="Gris"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/BWMode"
@@ -52,7 +52,7 @@
             android:drawableTop="@drawable/ic_black_and_white"
             android:singleLine="true"
             android:text="N &amp; B"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/rotanticButton"
@@ -63,7 +63,7 @@
             android:drawableTop="@drawable/ic_rotac"
             android:singleLine="true"
             android:text="Gauche"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/rotcButton"
@@ -74,7 +74,7 @@
             android:drawableTop="@drawable/ic_rotc"
             android:singleLine="true"
             android:text="Droite"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -87,7 +87,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/bottom_bar_padding"
         android:text="@string/done"
-        android:textColor="@android:color/white"/>
+        android:textColor="@color/white"/>
 
 
     <FrameLayout

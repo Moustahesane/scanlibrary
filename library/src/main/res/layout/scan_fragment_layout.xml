@@ -5,9 +5,43 @@
     android:orientation="vertical"
     android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/editButton"
+    <LinearLayout
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/ll"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingLeft="40dp"
+            android:paddingRight="20dp"
+            android:background="@color/blue"
+            android:drawableRight="@drawable/ic_edit"
+            android:text="Editer"/>
+
+        <Button
+            android:id="@+id/scanButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="40dp"
+            android:layout_weight="1"
+            android:paddingRight="20dp"
+            android:drawableRight="@drawable/ic_forward"
+            android:background="@color/bottom_background_color"
+            android:text="Suivant"/>
+    </LinearLayout>
+
+
+   <!-- <Button
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/scanButton"
         android:background="@color/greenish"
@@ -25,12 +59,12 @@
         android:orientation="horizontal"
         android:padding="@dimen/bottom_bar_padding"
         android:textColor="@android:color/white"
-        android:text="@string/scan"></Button>
+        android:text="@string/scan"></Button> -->
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/scanButton"
+        android:layout_above="@id/ll"
         android:layout_gravity="center"
         android:layout_margin="@dimen/scanPadding">
 
