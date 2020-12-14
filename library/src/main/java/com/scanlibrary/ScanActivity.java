@@ -9,6 +9,7 @@ import android.app.FragmentTransaction;
 import android.content.ComponentCallbacks2;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import java.io.File;
+import java.sql.Blob;
 
 /**
  * Created by jhansi on 28/03/15.
@@ -31,8 +33,16 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
 
         //init();
         File f = new File(Environment.getExternalStorageDirectory()+"/documania-capture-document.png");
-        Log.d("aaa", "onCreate: ");
-        Toast.makeText(this, "file is file = "+f.isFile(), Toast.LENGTH_LONG).show();
+
+
+        String filePath = f.getPath();
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+
+        Uri u = Utils.getUri(this, bitmap);
+
+        onBitmapSelect(u);
+
+
 
     }
 

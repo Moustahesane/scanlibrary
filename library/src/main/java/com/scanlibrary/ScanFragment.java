@@ -223,7 +223,7 @@ public class ScanFragment extends Fragment {
             btm = bitmap;
             Uri uri = Utils.getUri(getActivity(), bitmap);
             scanner.onScanFinish(uri);
-            return bitmap;
+            return bitmap; 
         }
 
         @Override
