@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -21,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,8 +61,6 @@ public class ScanFragment extends Fragment {
     public ScanFragment() {
 
     }
-
-
 
     private void init() {
         sourceImageView = (ImageView) view.findViewById(R.id.sourceImageView);
@@ -224,31 +220,10 @@ public class ScanFragment extends Fragment {
         @Override
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap =  getScannedBitmap(original, points);
-
-
-            setBitmap(btm);
-            Uri uri; //= Utils.getUri(getActivity(), bitmap);
-            //scanner.onScanFinish(uri);
-            btm = ((ScanActivity)getActivity()).getMagicColorBitmap(bitmap);
-            uri = Utils.getUri(((ScanActivity)getActivity()), btm);
-
-            Intent data = new Intent();
-
-            data.putExtra(ScanConstants.SCANNED_RESULT, uri);
-
-            getActivity().setResult(Activity.RESULT_OK, data);
-
-            System.gc();
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    dismissDialog();
-                    ((ScanActivity)getActivity()).finish();
-
-                }
-            });
-
-        return btm;
+            btm = bitmap;
+            Uri uri = Utils.getUri(getActivity(), bitmap);
+            scanner.onScanFinish(uri);
+            return bitmap;
         }
 
         @Override
@@ -264,7 +239,6 @@ public class ScanFragment extends Fragment {
 
             bitmap.recycle();
             dismissDialog();
-
         }
     }
 
@@ -279,7 +253,5 @@ public class ScanFragment extends Fragment {
         scanButton.setVisibility(View.INVISIBLE);
         polygonView.setVisibility(View.INVISIBLE);
     }
-
-    public native Bitmap getMagicColorBitmap(Bitmap bitmap);
 
 }

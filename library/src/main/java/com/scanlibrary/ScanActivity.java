@@ -12,8 +12,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 import android.widget.Toolbar;
+
+import java.io.File;
 
 /**
  * Created by jhansi on 28/03/15.
@@ -25,8 +29,10 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_layout);
 
-        init();
+        //init();
+        File f = new File(Environment.getExternalStorageDirectory()+"documania-capture-document.png");
 
+        Toast.makeText(this, "file is file = "+f.isFile(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -119,13 +125,6 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
 
     protected synchronized void dismissDialog() {
         progressDialogFragment.dismissAllowingStateLoss();
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        this.finish();
-
     }
 
     @Override
