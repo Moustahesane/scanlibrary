@@ -30,8 +30,8 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         setContentView(R.layout.scan_layout);
 
         //init();
-        File f = new File(Environment.getExternalStorageDirectory()+"documania-capture-document.png");
-
+        File f = new File(Environment.getExternalStorageDirectory()+"/documania-capture-document.png");
+        Log.d("aaa", "onCreate: ");
         Toast.makeText(this, "file is file = "+f.isFile(), Toast.LENGTH_LONG).show();
 
     }
