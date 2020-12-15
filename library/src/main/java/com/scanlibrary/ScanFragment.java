@@ -241,8 +241,8 @@ public class ScanFragment extends Fragment implements IBackPress {
         //@SuppressLint("WrongThread")
         @Override
         protected Bitmap doInBackground(Void... params) {
-            Bitmap bitmap =  getScannedBitmap(original, points);
-            Bitmap _bitmap = ((ScanActivity) getActivity()).getMagicColorBitmap(bitmap);
+            Bitmap _bitmap =  getScannedBitmap(original, points);
+            //Bitmap _bitmap = ((ScanActivity) getActivity()).getMagicColorBitmap(bitmap);
             btm = _bitmap;
             Intent data = new Intent();
 
@@ -259,7 +259,7 @@ public class ScanFragment extends Fragment implements IBackPress {
                 }
             });
             //scanner.onScanFinish(uri);
-            return bitmap;
+            return _bitmap;
         }
 
         @Override

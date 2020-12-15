@@ -33,19 +33,26 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         setContentView(R.layout.scan_layout);
 
         //init();
-        File f = new File(Environment.getExternalStorageDirectory()+"/documania-capture-document.jpeg");
 
 
-        String filePath = f.getPath();
-        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        if (getPreferenceContent() == 5){
+            init();
+        }else{
 
-        Uri u = Utils.getUri(this, bitmap);
-
-        onBitmapSelect(u);
+            File f = new File(Environment.getExternalStorageDirectory()+"/documania-capture-document.jpeg");
 
 
+            String filePath = f.getPath();
+            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+
+            Uri u = Utils.getUri(this, bitmap);
+
+            onBitmapSelect(u);
+
+        }
 
     }
+
 
     private void init() {
         PickImageFragment fragment = new PickImageFragment();
