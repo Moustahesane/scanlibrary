@@ -254,7 +254,7 @@ public class ScanFragment extends Fragment implements IBackPress {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //dismissDialog();
+                    dismissDialog();
                     getActivity().finish();
                 }
             });
@@ -308,6 +308,7 @@ public class ScanFragment extends Fragment implements IBackPress {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.content, fragment);
             fragmentTransaction.addToBackStack(ResultFragment.class.toString());
+            dismissDialog();
             fragmentTransaction.commit();
 
             return bitmap;

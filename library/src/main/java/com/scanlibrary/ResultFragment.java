@@ -110,6 +110,7 @@ public class ResultFragment extends Fragment {
                         getActivity().setResult(Activity.RESULT_OK, data);
                         original.recycle();
                         System.gc();
+
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
