@@ -23,7 +23,7 @@
             android:paddingRight="20dp"
             android:background="@color/blue"
             android:drawableRight="@drawable/ic_edit"
-            android:text="Editer"/>
+            android:text="Modifier"/>
 
         <Button
             android:id="@+id/scanButton"

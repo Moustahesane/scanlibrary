@@ -74,7 +74,7 @@ public class ScanFragment extends Fragment implements IBackPress {
 
         scanButton = (Button) view.findViewById(R.id.scanButton);
         editButton  = (Button) view.findViewById(R.id.editButton);
-        scanButton.setVisibility(View.VISIBLE);
+
         scanButton.setOnClickListener(new ScanButtonClickListener());
         editButton.setOnClickListener(new EditButtonClickListener());
         sourceFrame = (FrameLayout) view.findViewById(R.id.sourceFrame);
@@ -265,14 +265,7 @@ public class ScanFragment extends Fragment implements IBackPress {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    setBitmap(btm);
-                }
-            });
-
+           
             bitmap.recycle();
             dismissDialog();
         }
@@ -332,7 +325,7 @@ public class ScanFragment extends Fragment implements IBackPress {
 
     protected void dismissDialog() {
         progressDialogFragment.dismissAllowingStateLoss();
-        scanButton.setVisibility(View.INVISIBLE);
+        //scanButton.setVisibility(View.INVISIBLE);
         polygonView.setVisibility(View.INVISIBLE);
     }
 
