@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -335,8 +336,11 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
             Log.d("my tagsss", "onActivityResult: pick frag");
             Log.d("my tagsss", "onActivityResult: bitmap byte counte = "+bitmap.getByteCount());
             if (bitmap.getByteCount() > 27500000){
-                Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                Toast t = Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_LONG);
+                t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                t.show();
+                openMediaContent();
+                //getActivity().finish();
             }else{
 
                 if ( camorgal == 0 )
