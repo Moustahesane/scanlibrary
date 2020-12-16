@@ -27,6 +27,8 @@ import java.sql.Blob;
  */
 public class ScanActivity extends Activity implements IScanner, ComponentCallbacks2 {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
 
     @Override
     public void onBitmapSelect(Uri uri) {
+        myUri = uri;
         ScanFragment fragment = new ScanFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ScanConstants.SELECTED_BITMAP, uri);
@@ -138,7 +141,34 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
             super.onBackPressed();
         }
 
-        this.finish();
+        if(fragment instanceof PickImageFragment){
+            this.finish();
+        }
+
+        if (fragment instanceof ScanFragment){
+            init();
+        }
+
+        if (fragment instanceof ResultFragment){
+           if (myUri !=  null){
+
+               ScanFragment frag = new ScanFragment();
+               Bundle bundle = new Bundle();
+               bundle.putParcelable(ScanConstants.SELECTED_BITMAP, myUri);
+               frag.setArguments(bundle);
+               android.app.FragmentManager fragmentManager = getFragmentManager();
+               FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+               fragmentTransaction.add(R.id.content, frag);
+               fragmentTransaction.addToBackStack(ScanFragment.class.toString());
+               fragmentTransaction.commit();
+
+           }else {
+               this.finish();
+           }
+
+
+        }
+
 
     }
 

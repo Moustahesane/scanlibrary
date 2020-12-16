@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +38,7 @@ import java.util.Date;
 /**
  * Created by jhansi on 04/04/15.
  */
-public class PickImageFragment extends Fragment implements  OnDialogButtonClickListener {
+public class PickImageFragment extends Fragment implements  OnDialogButtonClickListener, IBackPress{
 
     public final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 1;
     int camorgal = 0;
@@ -77,6 +78,11 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
         view = inflater.inflate(R.layout.pick_image_fragment, null);
         init();
         return view;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        return true;
     }
 
     private void init() {
@@ -326,46 +332,53 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
             getActivity().finish();
         }
         if (bitmap != null) {
-            
-            if ( camorgal == 0 )
-            {
-            //PickImageFragment.this.getActivity().getContentResolver().notifyChange(fileUri, null);
-            File imageFile = new File(fileUri.getPath());
-            ExifInterface exif = null;
-            
-            try
-            {
-                exif = new ExifInterface(imageFile.getAbsolutePath());
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            
-            int orientation = 0;
-            if (exif != null)
-            {
-                orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            }
-            
-            int rotate = 0;
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    rotate = 270;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    rotate = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    rotate = 90;
-                    break;
-            }
 
-            android.graphics.Matrix matrix = new android.graphics.Matrix();
-            matrix.postRotate(rotate);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            if (bitmap.getByteCount() > 1000000){
+                Toast.makeText(getActivity(), "Le fichier à importer dépasse la limite de taille !", Toast.LENGTH_SHORT).show();
+                return;
+            }else{
+
+                if ( camorgal == 0 )
+                {
+                //PickImageFragment.this.getActivity().getContentResolver().notifyChange(fileUri, null);
+                File imageFile = new File(fileUri.getPath());
+                ExifInterface exif = null;
+
+                try
+                {
+                    exif = new ExifInterface(imageFile.getAbsolutePath());
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+
+                int orientation = 0;
+                if (exif != null)
+                {
+                    orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                }
+
+                int rotate = 0;
+                switch (orientation) {
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        rotate = 270;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        rotate = 180;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        rotate = 90;
+                        break;
+                }
+
+                android.graphics.Matrix matrix = new android.graphics.Matrix();
+                matrix.postRotate(rotate);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                }
+                postImagePick(bitmap);
+
             }
-            postImagePick(bitmap);
         }
     }
 

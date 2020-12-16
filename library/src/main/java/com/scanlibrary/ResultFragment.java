@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by jhansi on 29/03/15.
  */
-public class ResultFragment extends Fragment {
+public class ResultFragment extends Fragment implements IBackPress {
 
     private View view;
     private ImageView scannedImageView;
@@ -43,6 +43,11 @@ public class ResultFragment extends Fragment {
         view = inflater.inflate(R.layout.result_layout, null);
         init();
         return view;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        return true;
     }
 
     private void init() {

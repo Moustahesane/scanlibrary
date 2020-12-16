@@ -11,6 +11,7 @@
     <string name="loading">Chargement</string>
     <string name="applying_filter">Filtrage</string>
     <string name="low_memory">Mémoire faible</string>
+    <string name="taille_depasse">Le fichier à importer dépasse la limite de taille !</string>
     <string name="low_memory_message">La mémoire de votre télephone est faible, Vous risquez de rencontrer un décalage lors de l\'édition des images.</string>
 
 </resources>

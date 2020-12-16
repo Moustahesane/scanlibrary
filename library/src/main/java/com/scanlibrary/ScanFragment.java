@@ -265,7 +265,7 @@ public class ScanFragment extends Fragment implements IBackPress {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-           
+
             bitmap.recycle();
             dismissDialog();
         }
