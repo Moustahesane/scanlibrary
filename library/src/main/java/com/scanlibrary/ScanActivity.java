@@ -155,22 +155,8 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         }
 
         if (fragment instanceof ResultFragment){
-           if (myUri !=  null){
-               Log.d("my tagsss", "onBackPressed: myuri gotten");
-               ScanFragment frag = new ScanFragment();
-               Bundle bundle = new Bundle();
-               bundle.putParcelable(ScanConstants.SELECTED_BITMAP, myUri);
-               frag.setArguments(bundle);
-               android.app.FragmentManager fragmentManager = getFragmentManager();
-               FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-               fragmentTransaction.add(R.id.content, frag);
-               fragmentTransaction.addToBackStack(ScanFragment.class.toString());
-               fragmentTransaction.commit();
 
-           }else {
-               this.finish();
-           }
-
+            super.onBackPressed();
 
         }
 

@@ -333,7 +333,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
         }
         if (bitmap != null) {
 
-            if (bitmap.getByteCount() > 1000000){
+            if (bitmap.getByteCount() > 5500000){
                 Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_SHORT).show();
                 getActivity().finish();
             }else{
