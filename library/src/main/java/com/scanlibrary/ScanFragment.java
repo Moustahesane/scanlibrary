@@ -327,7 +327,7 @@ public class ScanFragment extends Fragment implements IBackPress {
     protected void dismissDialog() {
         progressDialogFragment.dismissAllowingStateLoss();
         //scanButton.setVisibility(View.INVISIBLE);
-        polygonView.setVisibility(View.INVISIBLE);
+        //polygonView.setVisibility(View.INVISIBLE);
     }
 
 }
