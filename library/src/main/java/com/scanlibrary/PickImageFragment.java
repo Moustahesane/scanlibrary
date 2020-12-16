@@ -334,8 +334,8 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
         if (bitmap != null) {
 
             if (bitmap.getByteCount() > 1000000){
-                Toast.makeText(getActivity(), "Le fichier à importer dépasse la limite de taille !", Toast.LENGTH_SHORT).show();
-                return;
+                Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }else{
 
                 if ( camorgal == 0 )

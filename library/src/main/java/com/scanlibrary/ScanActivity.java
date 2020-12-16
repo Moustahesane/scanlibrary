@@ -76,10 +76,11 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
 
     @Override
     public void onBitmapSelect(Uri uri) {
+        Log.d("my tagsss", "onBitmapSelect: bitmap set in myUri");
         myUri = uri;
         ScanFragment fragment = new ScanFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ScanConstants.SELECTED_BITMAP, uri);
+        bundle.putParcelable(ScanConstants.SELECTED_BITMAP, myUri);
         fragment.setArguments(bundle);
         android.app.FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -146,12 +147,16 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         }
 
         if (fragment instanceof ScanFragment){
+
+            if(getPreferenceContent() == 4)
+                this.finish();
+            else
             init();
         }
 
         if (fragment instanceof ResultFragment){
            if (myUri !=  null){
-
+               Log.d("my tagsss", "onBackPressed: myuri gotten");
                ScanFragment frag = new ScanFragment();
                Bundle bundle = new Bundle();
                bundle.putParcelable(ScanConstants.SELECTED_BITMAP, myUri);

@@ -84,6 +84,7 @@ public class ScanFragment extends Fragment implements IBackPress {
             public void run() {
                 original = getBitmap();
                 if (original != null) {
+                    Log.d("my tagsss", "run: from scan frag got original bitmap from myUri");
                     setBitmap(original);
                 }
             }
