@@ -341,7 +341,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
                 Toast t = Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_LONG);
                 t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 View v = t.getView();
-                v.setBackgroundColor(Color.parseColor("#0ab0ff"));
+                v.setBackgroundColor(Color.parseColor("#0ab1ff"));
                 v.setPadding(6,6,6,6);
                 
                 t.show();
