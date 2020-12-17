@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.media.ExifInterface;
 
 import android.net.Uri;
@@ -336,10 +337,15 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
         if (bitmap != null) {
             Log.d("my tagsss", "onActivityResult: pick frag");
             Log.d("my tagsss", "onActivityResult: bitmap byte counte = "+bitmap.getByteCount());
-            if (bitmap.getByteCount() > 20500000){
+            if (bitmap.getByteCount() > 30500000){
                 Toast t = Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_LONG);
                 t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                t.getView().setBackgroundColor(Color.parseColor("#D23BA7E4"));
+                View v = t.getView();
+                v.setBackgroundColor(Color.parseColor("#D23BA7"));
+                v.setPadding(6,6,6,6);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    v.setZ(1.6f);
+                }
                 t.show();
                 openMediaContent();
                 //getActivity().finish();
@@ -379,7 +385,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
                         break;
                 }
 
-                android.graphics.Matrix matrix = new android.graphics.Matrix();
+                Matrix matrix = new Matrix();
                 matrix.postRotate(rotate);
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                 }
