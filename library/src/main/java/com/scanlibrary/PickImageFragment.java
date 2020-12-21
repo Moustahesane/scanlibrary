@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -22,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -346,7 +348,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
                 URI juri;
                 juri = new URI(data.getData().toString());
                 File ff = new File(juri.getPath());
-                Log.d("my tagsss", "onActivityResult: file from uri byte counte = "+ff.length());
+                Log.d("my tagsss", "onActivityResult: file from uri byte counte = "+getFileSize(data.getData()));
             }catch (URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -431,4 +433,13 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
                 fileDescriptor.getFileDescriptor(), null, options);
         return original;
     }
+    private long getFileSize(Uri fileUri) {
+        Cursor returnCursor = getActivity().getContentResolver().
+                query(fileUri, null, null, null, null);
+        int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+        returnCursor.moveToFirst();
+
+        return returnCursor.getLong(sizeIndex);
+    }
+
 }
