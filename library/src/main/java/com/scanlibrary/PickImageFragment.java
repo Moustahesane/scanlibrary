@@ -36,6 +36,8 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -328,6 +330,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
                     case ScanConstants.PICKFILE_REQUEST_CODE:
                         bitmap = getBitmap(data.getData());
 
+
                         break;
                 }
             } catch (Exception e) {
@@ -339,7 +342,16 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
         if (bitmap != null) {
             Log.d("my tagsss", "onActivityResult: pick frag");
             Log.d("my tagsss", "onActivityResult: bit map byte counte = "+bitmap.getByteCount());
-            Log.d("my tagsss", "onActivityResult: file from uri byte counte = "+new File(data.getData().getPath()).length());
+            try{
+                URI juri;
+                juri = new URI(data.getData().toString());
+                File ff = new File(juri.getPath());
+                Log.d("my tagsss", "onActivityResult: file from uri byte counte = "+ff.length());
+            }catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+
             if (bitmap.getByteCount() > 52000000){
                 Toast t = Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_LONG);
                 t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
