@@ -327,6 +327,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
 
                     case ScanConstants.PICKFILE_REQUEST_CODE:
                         bitmap = getBitmap(data.getData());
+
                         break;
                 }
             } catch (Exception e) {
@@ -338,6 +339,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
         if (bitmap != null) {
             Log.d("my tagsss", "onActivityResult: pick frag");
             Log.d("my tagsss", "onActivityResult: bit map byte counte = "+bitmap.getByteCount());
+            Log.d("my tagsss", "onActivityResult: file from uri byte counte = "+new File(data.getData().getPath()).length());
             if (bitmap.getByteCount() > 52000000){
                 Toast t = Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_LONG);
                 t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
