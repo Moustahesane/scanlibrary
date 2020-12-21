@@ -346,6 +346,7 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
                 v.setPadding(6,6,6,6);
                 
                 t.show();
+                bitmap.recycle();
                 openMediaContent();
                 //getActivity().finish();
             }else{
