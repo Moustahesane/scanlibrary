@@ -45,15 +45,14 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
 
             Log.d("my tag", "scan activity => onCreate: "+ this.getCacheDir().toString());
 
-            if(f != null){
+
                 String filePath = f.getPath();
                 Bitmap bitmap = BitmapFactory.decodeFile(filePath);
 
                 Uri u = Utils.getUri(this, bitmap);
 
                 onBitmapSelect(u); 
-            }else
-                Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
+
             
 
         }
