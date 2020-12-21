@@ -344,17 +344,11 @@ public class PickImageFragment extends Fragment implements  OnDialogButtonClickL
         if (bitmap != null) {
             Log.d("my tagsss", "onActivityResult: pick frag");
             Log.d("my tagsss", "onActivityResult: bit map byte counte = "+bitmap.getByteCount());
-            try{
-                URI juri;
-                juri = new URI(data.getData().toString());
-                File ff = new File(juri.getPath());
-                Log.d("my tagsss", "onActivityResult: file from uri byte counte = "+getFileSize(data.getData()));
-            }catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+
+            Log.d("my tagsss", "onActivityResult: file from uri byte counte = "+getFileSize(data.getData()));
 
 
-            if (bitmap.getByteCount() > 52000000){
+            if (getFileSize(data.getData()) > 5300000){
                 Toast t = Toast.makeText(getActivity(), getResources().getString(R.string.taille_depasse), Toast.LENGTH_LONG);
                 t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 View v = t.getView();
