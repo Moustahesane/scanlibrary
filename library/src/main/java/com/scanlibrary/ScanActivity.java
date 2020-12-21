@@ -40,16 +40,21 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         if (getPreferenceContent() == 5){
             init();
         }else{
+            //Environment.getExternalStorageDirectory()
+            File f = new File(this.getCacheDir()+"/documania-capture-document.jpeg");
 
-            File f = new File(Environment.getExternalStorageDirectory()+"/documania-capture-document.jpeg");
+            Log.d("my tag", "scan activity => onCreate: "+ this.getCacheDir().toString());
 
+            if(f != null){
+                String filePath = f.getPath();
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
 
-            String filePath = f.getPath();
-            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                Uri u = Utils.getUri(this, bitmap);
 
-            Uri u = Utils.getUri(this, bitmap);
-
-            onBitmapSelect(u);
+                onBitmapSelect(u); 
+            }else
+                Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
+            
 
         }
 
