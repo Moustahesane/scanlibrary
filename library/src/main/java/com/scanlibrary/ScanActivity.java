@@ -43,6 +43,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
             //Environment.getExternalStorageDirectory()
             File f = new File(this.getCacheDir()+"/documania-capture-document.jpeg");
 
+
             Log.d("my tag", "scan activity => onCreate: "+ this.getCacheDir().toString());
 
 

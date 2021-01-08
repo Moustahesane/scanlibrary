@@ -254,6 +254,14 @@ public class ScanFragment extends Fragment implements IBackPress {
             data.putExtra(ScanConstants.SCANNED_RESULT, uri);
             getActivity().setResult(Activity.RESULT_OK, data);
 
+
+            //scanner.onScanFinish(uri);
+            return _bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
             System.gc();
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -262,19 +270,12 @@ public class ScanFragment extends Fragment implements IBackPress {
                     getActivity().finish();
                 }
             });
-            //scanner.onScanFinish(uri);
-            return _bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
             scanButton.setEnabled(false);
             editButton.setEnabled(false);
             scanButton.setVisibility(View.INVISIBLE);
             editButton.setVisibility(View.INVISIBLE);
             bitmap.recycle();
-            dismissDialog();
+            
         }
     }
 
@@ -297,6 +298,14 @@ public class ScanFragment extends Fragment implements IBackPress {
         @Override
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap =  getScannedBitmap(original, points);
+
+
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
             Uri uri = Utils.getUri(getActivity(), bitmap);
 
             ResultFragment fragment = new ResultFragment();
@@ -309,18 +318,11 @@ public class ScanFragment extends Fragment implements IBackPress {
             fragmentTransaction.add(R.id.content, fragment);
             fragmentTransaction.addToBackStack(ResultFragment.class.toString());
             dismissDialog();
+
             fragmentTransaction.commit();
 
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-
-
             bitmap.recycle();
-            dismissDialog();
+
         }
     }
 
