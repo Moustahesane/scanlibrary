@@ -254,15 +254,25 @@ public class ScanFragment extends Fragment implements IBackPress {
             data.putExtra(ScanConstants.SCANNED_RESULT, uri);
             getActivity().setResult(Activity.RESULT_OK, data);
 
+            this.cancel(true);
 
             //scanner.onScanFinish(uri);
             return _bitmap;
         }
 
         @Override
+        protected void onCancelled(Bitmap bitmap) {
+            super.onCancelled(bitmap);
+
+            getActivity().finish();
+            dismissDialog();
+        }
+
+        @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             System.gc();
+
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -275,7 +285,7 @@ public class ScanFragment extends Fragment implements IBackPress {
             scanButton.setVisibility(View.INVISIBLE);
             editButton.setVisibility(View.INVISIBLE);
             bitmap.recycle();
-            
+
         }
     }
 
@@ -299,8 +309,32 @@ public class ScanFragment extends Fragment implements IBackPress {
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap =  getScannedBitmap(original, points);
 
+            this.cancel(true);
 
             return bitmap;
+        }
+
+        @Override
+        protected void onCancelled(Bitmap bitmap) {
+            super.onCancelled(bitmap);
+
+            Uri uri = Utils.getUri(getActivity(), bitmap);
+
+            ResultFragment fragment = new ResultFragment();
+            Bundle bundle = new Bundle();
+
+            bundle.putParcelable(ScanConstants.SCANNED_RESULT, uri);
+            fragment.setArguments(bundle);
+            android.app.FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.content, fragment);
+            fragmentTransaction.addToBackStack(ResultFragment.class.toString());
+
+
+            fragmentTransaction.commit();
+            dismissDialog();
+            bitmap.recycle();
+
         }
 
         @Override
